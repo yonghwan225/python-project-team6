@@ -12,7 +12,7 @@ f = files.upload()
 
 import pandas as pd
 import numpy as np
-
+#sdajfasd
 
 df = pd.read_csv('서울교통공사_지하철혼잡도정보_20241231.csv', encoding = 'cp949')
 
