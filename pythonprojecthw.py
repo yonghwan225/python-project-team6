@@ -76,25 +76,25 @@ dfEveningRushTop10, dfEveningRushBottom10 = metroSort('혼잡도 퇴근시간 �
 dfNightTop10, dfNightBottom10 = metroSort('혼잡도 야간시간 평균')
 
 
-def CongestionGraph(somethingDf, congestionName, timeStr):
+def CongestionGraph(somethingDf, congestionName, timeStr, yheight):
     plt.figure(figsize=(5, 3))
     plt.bar(somethingDf['요일출발역'], somethingDf[congestionName])
     plt.xticks(rotation=90)
     plt.xlabel('출발역')
     plt.ylabel('혼잡도(%)')
     plt.title(timeStr)
-    plt.ylim(0, 130)
+    plt.ylim(0, yheight)
     plt.show()
 
 #print graph
-CongestionGraph(dfTotalTop10, '혼잡도 전체평균', '전체 혼잡도(05:30 ~ 00:30) (상위 10개)')
-CongestionGraph(dfMorningTop10, '혼잡도 출근시간 평균','출근 시간 혼잡도(05:30 ~ 10:00) (상위 10개)')
-CongestionGraph(dfEveningRushTop10, '혼잡도 퇴근시간 평균','퇴근 시간 혼잡도(18:00 ~ 21:00) (상위 10개)')
-CongestionGraph(dfAfternoonTop10, '혼잡도 그 외 시간 평균','그 외 시간 혼잡도(10:00 ~ 18:00) (상위 10개)')
-CongestionGraph(dfNightTop10, '혼잡도 야간시간 평균','야간 시간 혼잡도(21:00 ~ 01:00) (상위 10개)')
+CongestionGraph(dfTotalTop10, '혼잡도 전체평균', '전체 혼잡도(05:30 ~ 00:30) (상위 10개)', 130)
+CongestionGraph(dfMorningTop10, '혼잡도 출근시간 평균','출근 시간 혼잡도(05:30 ~ 10:00) (상위 10개)', 130)
+CongestionGraph(dfEveningRushTop10, '혼잡도 퇴근시간 평균','퇴근 시간 혼잡도(18:00 ~ 21:00) (상위 10개)', 130)
+CongestionGraph(dfAfternoonTop10, '혼잡도 그 외 시간 평균','그 외 시간 혼잡도(10:00 ~ 18:00) (상위 10개)', 130)
+CongestionGraph(dfNightTop10, '혼잡도 야간시간 평균','야간 시간 혼잡도(21:00 ~ 01:00) (상위 10개)', 130)
 
-CongestionGraph(dfTotalBottom10, '혼잡도 전체평균', '전체 혼잡도(05:30 ~ 00:30) (하위 10개)')
-CongestionGraph(dfMorningBottom10, '혼잡도 출근시간 평균','출근 시간 혼잡도(05:30 ~ 10:00) (하위 10개)')
-CongestionGraph(dfEveningRushBottom10, '혼잡도 퇴근시간 평균','퇴근 시간 혼잡도(18:00 ~ 21:00) (하위 10개)')
-CongestionGraph(dfAfternoonBottom10, '혼잡도 그 외 시간 평균','그 외 시간 혼잡도(10:00 ~ 18:00) (하위 10개)')
-CongestionGraph(dfNightBottom10, '혼잡도 야간시간 평균','야간 시간 혼잡도(21:00 ~ 01:00) (하위 10개)')
+CongestionGraph(dfTotalBottom10, '혼잡도 전체평균', '전체 혼잡도(05:30 ~ 00:30) (하위 10개)', 10)
+CongestionGraph(dfMorningBottom10, '혼잡도 출근시간 평균','출근 시간 혼잡도(05:30 ~ 10:00) (하위 10개)', 10)
+CongestionGraph(dfEveningRushBottom10, '혼잡도 퇴근시간 평균','퇴근 시간 혼잡도(18:00 ~ 21:00) (하위 10개)', 10)
+CongestionGraph(dfAfternoonBottom10, '혼잡도 그 외 시간 평균','그 외 시간 혼잡도(10:00 ~ 18:00) (하위 10개)', 10)
+CongestionGraph(dfNightBottom10, '혼잡도 야간시간 평균','야간 시간 혼잡도(21:00 ~ 01:00) (하위 10개)', 10)
