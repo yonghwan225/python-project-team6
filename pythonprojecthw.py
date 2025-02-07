@@ -58,7 +58,7 @@ dfResult = pd.DataFrame(listResult, columns = column_names)
 
 
 dfResult['요일출발역'] = dfResult['요일구분'] + dfResult['출발역'] + dfResult['상하구분']
-dfResult.drop(['요일구분', '출발역', '상하구분'], axis=1, inplace=True)
+dfResult.drop(['요일구분', '출발역', '상하구분'], axis = 1, inplace = True)
 
 #sort dataframe
 def metroSort(congestionName):
