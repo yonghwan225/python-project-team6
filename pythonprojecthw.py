@@ -80,74 +80,42 @@ dfResult = pd.DataFrame(listResult, columns = column_names)
 dfResult['요일출발역'] = dfResult['요일구분'] + dfResult['출발역'] + dfResult['상하구분']
 dfResult.drop(['요일구분', '출발역', '상하구분'], axis=1, inplace=True)
 
+#sortdataframe
+def metroSort(congestionName):
+    dfResult.sort_values(by = [congestionName], ascending = False, inplace = True)
+    dfTop10 = dfResult[dfResult[congestionName] != 0].head(10)
+    dfTop10
+    dfBottom10 = dfResult[dfResult[congestionName] != 0].tail(10)
+    dfBottom10
+    return dfTop10, dfBottom10
 
-dfResult.sort_values(by = ['혼잡도 전체평균'], ascending = False, inplace = True)
-dfTotalTop10 = dfResult[dfResult['혼잡도 전체평균'] != 0].head(10)
-dfTotalTop10
-dfTotalBottom10 = dfResult[dfResult['혼잡도 전체평균'] != 0].tail(10)
-dfTotalBottom10
-
-dfResult.sort_values(by = ['혼잡도 출근시간 평균'], ascending = False, inplace = True)
-dfMorningTop10 = dfResult[dfResult['혼잡도 전체평균'] != 0].head(10)
-dfMorningTop10
-dfMorningBottom10 = dfResult[dfResult['혼잡도 전체평균'] != 0].tail(10)
-dfMorningBottom10
-
-
-dfResult.sort_values(by = ['혼잡도 그 외 시간 평균'], ascending = False, inplace = True)
-dfAfternoonTop10 = dfResult[dfResult['혼잡도 전체평균'] != 0].head(10)
-dfAfternoonTop10
-dfAfternoonBottom10 = dfResult[dfResult['혼잡도 전체평균'] != 0].tail(10)
-dfAfternoonBottom10
-
-dfResult.sort_values(by = ['혼잡도 퇴근시간 평균'], ascending = False, inplace = True)
-dfEveningRushTop10 = dfResult[dfResult['혼잡도 전체평균'] != 0].head(10)
-dfEveningRushTop10
-dfEveningRushBottom10 = dfResult[dfResult['혼잡도 전체평균'] != 0].tail(10)
-dfEveningRushBottom10
-
-dfResult.sort_values(by = ['혼잡도 야간시간 평균'], ascending = False, inplace = True)
-dfNightTop10 = dfResult[dfResult['혼잡도 전체평균'] != 0].head(10)
-dfNightTop10
-dfNightBottom10 = dfResult[dfResult['혼잡도 전체평균'] != 0].tail(10)
-dfNightBottom10
+dfTotalTop10, dfTotalBottom10 = metroSort('혼잡도 전체평균')
+dfMorningTop10, dfMorningBottom10 = metroSort('혼잡도 출근시간 평균')
+dfAfternoonTop10, dfAfternoonBottom10 = metroSort('혼잡도 그 외 시간 평균')
+dfEveningRushTop10, dfEveningRushBottom10 = metroSort('혼잡도 퇴근시간 평균')
+dfNightTop10, dfNightBottom10 = metroSort('혼잡도 야간시간 평균')
 
 
 import matplotlib.pyplot as plt
 
 def CongestionGraph(somethingDf, congestionName, timeStr):
-    plt.figure(figsize=(5, 5))
+    plt.figure(figsize=(5, 3))
     plt.bar(somethingDf['요일출발역'], somethingDf[congestionName])
     plt.xticks(rotation=90)
     plt.xlabel('출발역')
     plt.ylabel('혼잡도(%)')
     plt.title(timeStr)
+    plt.ylim(0, 130)
     plt.show()
 
-CongestionGraph(dfTotalTop10, '혼잡도 전체평균', '전체')
+CongestionGraph(dfTotalTop10, '혼잡도 전체평균', '전체 혼잡도 (상위 10개)')
 CongestionGraph(dfMorningTop10, '혼잡도 출근시간 평균','출근 시간 혼잡도 (상위 10개)')
+CongestionGraph(dfEveningRushTop10, '혼잡도 퇴근시간 평균','퇴근 시간 혼잡도 (상위 10개)')
+CongestionGraph(dfAfternoonTop10, '혼잡도 그 외 시간 평균','그 외 시간 혼잡도 (상위 10개)')
+CongestionGraph(dfNightTop10, '혼잡도 야간시간 평균','야간 시간 혼잡도 (상위 10개)')
 
-dfTotalTop10
-
-
-
-# plt.figure(figsize=(5, 5))
-# plt.bar(dfMorningTop10['요일출발역'], dfMorningTop10['혼잡도 출근시간 평균'])
-# plt.xticks(rotation=90)
-# plt.xlabel('출발역')
-# plt.ylabel('혼잡도(%)')
-# plt.title('출근 시간 혼잡도 (상위 10개)')
-# plt.show()
-
-# plt.figure(figsize=(5, 5))
-# plt.bar(dfNightBottom10['요일출발역'], dfNightBottom10['혼잡도 야간시간 평균'])
-# plt.xticks(rotation=90)
-# plt.xlabel('출발역')
-# plt.ylabel('혼잡도(%)')
-# plt.title('야간 시간 혼잡도 (하위 10개)')
-# plt.show()
-
-
-
-
-# dfNightBottom10
+CongestionGraph(dfTotalBottom10, '혼잡도 전체평균', '전체 혼잡도 (하위 10개)')
+CongestionGraph(dfMorningBottom10, '혼잡도 출근시간 평균','출근 시간 혼잡도 (하위 10개)')
+CongestionGraph(dfEveningRushBottom10, '혼잡도 퇴근시간 평균','퇴근 시간 혼잡도 (하위 10개)')
+CongestionGraph(dfAfternoonBottom10, '혼잡도 그 외 시간 평균','그 외 시간 혼잡도 (하위 10개)')
+CongestionGraph(dfNightBottom10, '혼잡도 야간시간 평균','야간 시간 혼잡도 (하위 10개)')
